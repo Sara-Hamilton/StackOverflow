@@ -26,4 +26,8 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Answer\" />
+  </ItemGroup>
+
 </Project>

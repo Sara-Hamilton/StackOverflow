@@ -18,6 +18,7 @@ namespace StackOverflow.Models
         public string Content { get; set; }
         public int VoteTally { get; set; } = 0;
 
+        public virtual ApplicationUser User { get; set; }
         public virtual List<Answer> Answers { get; set; }
     }
 }

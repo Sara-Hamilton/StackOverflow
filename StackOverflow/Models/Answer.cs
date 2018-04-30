@@ -18,5 +18,7 @@ namespace StackOverflow.Models
         public string Content { get; set; }
         public int VoteTally { get; set; } = 0;
         public bool Best { get; set; } = false;
+
+        public virtual ApplicationUser User { get; set; }
     }
 }
