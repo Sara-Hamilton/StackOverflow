@@ -36,10 +36,11 @@ namespace StackOverflow.Controllers
             Answer answer = new Answer();
             answer.Content = Request.Form["content"];
             answer.QuestionId = int.Parse(Request.Form["questionId"]);
+            var routeId = int.Parse(Request.Form["questionId"]);
             answer.UserId = currentUser.Id;
             _db.Answers.Add(answer);
             _db.SaveChanges();
-            return RedirectToAction("Index", "Questions");
+            return RedirectToAction("Details", "Questions", new { id = routeId});
         }
     }
 }
