@@ -12,6 +12,7 @@ namespace StackOverflow.Models
     {
         [Key]
         public int QuestionId { get; set; }
+        [ForeignKey ("UserId")]
         public string UserId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

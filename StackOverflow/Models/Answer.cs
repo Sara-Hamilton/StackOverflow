@@ -13,6 +13,7 @@ namespace StackOverflow.Models
         [Key]
         public int AnswerId { get; set; }
         public int QuestionId { get; set; }
+        [ForeignKey("UserId")]
         public string UserId { get; set; }
         public string Content { get; set; }
         public int VoteTally { get; set; } = 0;
