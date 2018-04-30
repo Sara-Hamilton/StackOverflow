@@ -5,6 +5,7 @@ using StackOverflow.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Linq;
+using System;
 
 namespace StackOverflow.Controllers
 {
@@ -27,20 +28,18 @@ namespace StackOverflow.Controllers
             return View(_db.Answers.Where(x => x.User.Id == currentUser.Id));
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public async Task<IActionResult> Create(Answer answer)
+        public async Task<IActionResult> Create()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            answer.User = currentUser;
+            Answer answer = new Answer();
+            answer.Content = Request.Form["content"];
+            answer.QuestionId = int.Parse(Request.Form["questionId"]);
+            answer.UserId = currentUser.Id;
             _db.Answers.Add(answer);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Questions");
         }
     }
 }

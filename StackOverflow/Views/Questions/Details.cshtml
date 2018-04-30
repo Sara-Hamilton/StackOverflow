@@ -11,3 +11,15 @@
         <hr />
         <p>@Model.Content</p>
 </div>
+
+
+
+<div class="well">
+    <form class="form-group" action="/Answers/Create" method="post">
+        <label>Your Answer:</label>
+        <textarea rows="8" cols="200" class="form-control" type="text" name="content"></textarea>
+        <input  name="questionId" value="@Model.QuestionId" placeholder="@Model.QuestionId"/>
+        <br />
+        <button class="btn">Add Answer</button>
+    </form>
+</div>
