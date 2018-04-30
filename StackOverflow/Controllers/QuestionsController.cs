@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using StackOverflow.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace StackOverflow.Controllers
 {
@@ -49,7 +50,7 @@ namespace StackOverflow.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            return View(_db.Questions.FirstOrDefault(x => x.QuestionId == id));
+            return View(_db.Questions.Include(question => question.Answers).FirstOrDefault(x => x.QuestionId == id));
         }
     }
 }

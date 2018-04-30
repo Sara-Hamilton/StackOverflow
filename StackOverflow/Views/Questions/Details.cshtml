@@ -7,10 +7,20 @@
 @model StackOverflow.Models.Question
 
 <div class="well">
-        <h2>@Model.Title</h2>
-        <hr />
-        <p>@Model.Content</p>
+    <h2>@Model.Title</h2>
+    <hr />
+    <p>@Model.Content</p>
 </div>
+
+@if (Model.Answers != null)
+{
+    @foreach (var listAnswer in @Model.Answers)
+    {
+        <div class="well">
+            @listAnswer.Content
+        </div>
+    }
+}
 
 
 
@@ -18,7 +28,7 @@
     <form class="form-group" action="/Answers/Create" method="post">
         <label>Your Answer:</label>
         <textarea rows="8" cols="200" class="form-control" type="text" name="content"></textarea>
-        <input  name="questionId" value="@Model.QuestionId" placeholder="@Model.QuestionId"/>
+        <input type="hidden" name="questionId" value="@Model.QuestionId" />
         <br />
         <button class="btn">Add Answer</button>
     </form>
