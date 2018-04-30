@@ -12,7 +12,7 @@ namespace StackOverflow.Models
     {
         [Key]
         public int QuestionId { get; set; }
-        public string Author { get; set; }
+        public int UserId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public int VoteTally { get; set; } = 0;
