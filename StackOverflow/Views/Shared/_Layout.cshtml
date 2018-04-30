@@ -36,8 +36,16 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                     <li><a asp-area="" asp-controller="Questions" asp-action="Index">Questions</a></li>
-                    <li><a asp-area="" asp-controller="Answers" asp-action="Index">Answers</a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a asp-area="" asp-controller="" asp-action="">Login/Logout</a></li>
+                </ul>
+                <ul class="navbar-text nav navbar-nav navbar-right">
+                    <li> Hello @User.Identity.Name</li>
+                </ul>
+
+
+
             </div>
         </div>
     </nav>
