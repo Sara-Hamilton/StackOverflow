@@ -4,13 +4,10 @@
 }
 
 @using System.Security.Claims
-@model IEnumerable<StackOverflow.Models.Question>
+@model StackOverflow.Models.Question
 
 <div class="well">
-    @foreach (var q in Model)
-    {
-        <h2>@q.Title</h2>
+        <h2>@Model.Title</h2>
         <hr />
-        <p>@q.Content</p>
-    }
+        <p>@Model.Content</p>
 </div>
