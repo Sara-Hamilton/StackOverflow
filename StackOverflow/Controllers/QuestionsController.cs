@@ -25,9 +25,11 @@ namespace StackOverflow.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsync(userId);
-            return View(_db.Questions.Where(x => x.User.Id == currentUser.Id));
+            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //var currentUser = await _userManager.FindByIdAsync(userId);
+            //return View(_db.Questions.Where(x => x.User.Id == currentUser.Id));
+
+            return View(_db.Questions);
         }
 
         public IActionResult Create()

@@ -10,6 +10,7 @@
     <h2>@Model.Title</h2>
     <hr />
     <p>@Model.Content</p>
+    <p>- @Model.User</p>
 </div>
 
 @if (Model.Answers != null)
@@ -18,6 +19,7 @@
     {
         <div class="well">
             @listAnswer.Content
+            <p>- @listAnswer.User</p>
         </div>
     }
 }
