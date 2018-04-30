@@ -17,9 +17,30 @@
 {
     @foreach (var listAnswer in @Model.Answers)
     {
-        <div class="well">
-            @listAnswer.Content
-            <p>- @listAnswer.User</p>
+        <div class="well text-center">
+            <div class="row">
+                <div class="col-sm-1">
+                    <div class="row">
+                        <form action="/answers/vote" method="post">
+                            <input type="hidden" name="vote" value="1" />
+                            <button class="btn"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></button>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <h3>@listAnswer.VoteTally</h3>                        
+                    </div>
+                    <div class="row">
+                        <form action="/answers/vote" method="post">
+                            <input type="hidden" name="vote" value="-1" />
+                            <button class="btn"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    @listAnswer.Content
+                    <p>- @listAnswer.User</p>
+                </div>
+            </div>
         </div>
     }
 }
@@ -35,3 +56,4 @@
         <button class="btn">Add Answer</button>
     </form>
 </div>
+ 
