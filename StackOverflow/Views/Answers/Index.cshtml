@@ -4,7 +4,7 @@
 }
 
 @using System.Security.Claims
-@model IEnumerable<StackOverflow.Models.Question>
+@model IEnumerable<StackOverflow.Models.Answer>
 
 <h2>Here is your list of questions, @User.Identity.Name</h2>
 <hr />
@@ -12,9 +12,9 @@
 @if (Model.Any())
 {
     <ul>
-        @foreach (var listQuestion in Model)
+        @foreach (var listAnswer in Model)
         {
-            <li><a href="~/Questions/Details/@listQuestion.QuestionId">@Html.DisplayFor(modelQuestion => listQuestion.Title)</a></li>
+            <li>@Html.DisplayFor(modelQuestion => listQuestion.Title)</li>
         }
     </ul>
 }

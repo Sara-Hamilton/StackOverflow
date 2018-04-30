@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Security.Claims
+@model IEnumerable<StackOverflow.Models.Question>
+
+<div class="well">
+    @foreach (var q in Model)
+    {
+        <h2>@q.Title</h2>
+        <hr />
+        <p>@q.Content</p>
+    }
+</div>
