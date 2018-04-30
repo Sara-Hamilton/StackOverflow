@@ -16,7 +16,7 @@ namespace StackOverflow.Controllers
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        private QuestionsController (UserManager<ApplicationUser> userManager, ApplicationDbContext db)
+        public QuestionsController (UserManager<ApplicationUser> userManager, ApplicationDbContext db)
         {
             _userManager = userManager;
             _db = db;
