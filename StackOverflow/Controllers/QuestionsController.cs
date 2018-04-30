@@ -52,7 +52,7 @@ namespace StackOverflow.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            return View(_db.Questions.Include(question => question.Answers).FirstOrDefault(x => x.QuestionId == id));
+            return View(_db.Questions.Include(question => question.Answers).Include(question => question.User).FirstOrDefault(x => x.QuestionId == id));
         }
     }
 }
