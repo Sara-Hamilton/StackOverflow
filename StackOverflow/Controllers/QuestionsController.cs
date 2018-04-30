@@ -22,11 +22,11 @@ namespace StackOverflow.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            return View(_db.Items.Where(x => x.User.Id == currentUser.Id));
+            return View(_db.Questions.Where(x => x.User.Id == currentUser.Id));
         }
 
         public IActionResult Create()
