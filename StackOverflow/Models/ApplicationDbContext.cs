@@ -20,5 +20,6 @@ namespace StackOverflow.Models
 
         public DbSet <Question> Questions { get; set; }
         public DbSet <Answer> Answers { get; set; }
+        public DbSet<Users_Answers> Users_Answers { get; set; }
     }
 }

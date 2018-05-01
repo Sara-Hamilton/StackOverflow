@@ -15,7 +15,7 @@ namespace StackOverflow.Models
         [ForeignKey("UserId")]
         public string UserId { get; set; }
         [ForeignKey("AnswerId")]
-        public string AnswerId { get; set; }
+        public int AnswerId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
         public virtual List<Answer> Answers { get; set; }

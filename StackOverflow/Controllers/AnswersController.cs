@@ -39,7 +39,7 @@ namespace StackOverflow.Controllers
             answer.QuestionId = int.Parse(Request.Form["questionId"]);
             var routeId = int.Parse(Request.Form["questionId"]);
             answer.UserId = currentUser.Id;
-            _db.Answers.Add(answer);
+            _db.Answers.Add(answer);    
             _db.SaveChanges();
             return RedirectToAction("Details", "Questions", new { id = routeId });
         }
@@ -52,13 +52,24 @@ namespace StackOverflow.Controllers
             int id = int.Parse(Request.Form["answerId"]);
             Answer answer = _db.Answers.FirstOrDefault(x => x.AnswerId == id);
             answer.VoteTally += int.Parse(Request.Form["vote"]);
-            _db.Answers.Update(answer);
-            _db.SaveChanges();
+            //_db.Answers.Update(answer);
+            Users_Answers ua = new Users_Answers();
+            ua.UserId = answer.UserId;
+            ua.AnswerId = answer.AnswerId;
+
+            var result = _db.Users_Answers.Where(x => x.UserId == answer.UserId).Where(x => x.AnswerId == answer.AnswerId);
+            if(result.Count() == 0)
+            {
+                _db.Answers.Update(answer);
+                _db.Users_Answers.Add(ua);
+                _db.SaveChanges();
+            }
+
             return RedirectToAction("Details", "Questions", new { id = answer.QuestionId });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Best()
+        public IActionResult Best()
         {
             int answerId = int.Parse(Request.Form["aId"]);
             int questionId = int.Parse(Request.Form["qId"]);

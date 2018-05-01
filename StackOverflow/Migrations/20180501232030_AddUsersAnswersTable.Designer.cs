@@ -8,9 +8,10 @@ using StackOverflow.Models;
 namespace StackOverflow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180501232030_AddUsersAnswersTable")]
+    partial class AddUsersAnswersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -135,8 +136,6 @@ namespace StackOverflow.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Property<int?>("Users_AnswersUAKey");
-
                     b.Property<int>("VoteTally");
 
                     b.HasKey("AnswerId");
@@ -144,8 +143,6 @@ namespace StackOverflow.Migrations
                     b.HasIndex("QuestionId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("Users_AnswersUAKey");
 
                     b.ToTable("Answers");
                 });
@@ -220,22 +217,6 @@ namespace StackOverflow.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("StackOverflow.Models.Users_Answers", b =>
-                {
-                    b.Property<int>("UAKey")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AnswerId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("UAKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Users_Answers");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
@@ -283,20 +264,9 @@ namespace StackOverflow.Migrations
                     b.HasOne("StackOverflow.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-
-                    b.HasOne("StackOverflow.Models.Users_Answers")
-                        .WithMany("Answers")
-                        .HasForeignKey("Users_AnswersUAKey");
                 });
 
             modelBuilder.Entity("StackOverflow.Models.Question", b =>
-                {
-                    b.HasOne("StackOverflow.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("StackOverflow.Models.Users_Answers", b =>
                 {
                     b.HasOne("StackOverflow.Models.ApplicationUser", "User")
                         .WithMany()
