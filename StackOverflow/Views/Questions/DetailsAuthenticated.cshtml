@@ -38,37 +38,33 @@
                         </form>
                     </div>
                 </div>
-                @if (ViewBag.UserId != null)
+                @if (listAnswer.Best == true && Model.UserId != ViewBag.UserId)
                 {
-                    @if (listAnswer.Best == true && Model.UserId != ViewBag.UserId)
+                    <div class="col-sm-1">
+                        <h2><span class="glyphicon glyphicon-ok green" style="color:green"></span></h2>
+                    </div>
+                }
+                @if (Model.UserId == ViewBag.UserId)
                     {
                         <div class="col-sm-1">
-                        <h2><span class="glyphicon glyphicon-ok green" style="color:green"></span></h2>
+                            <form action="/Answers/Best" method="post">
+                                <input type="hidden" name="aId" value="@listAnswer.AnswerId" />
+                                <input type="hidden" name="qId" value="@Model.QuestionId" />
+                                <button class="btn" type="submit">Best</button>
+                            </form>
+                            @if (listAnswer.Best == true)
+                            {
+                                <h2><span class="glyphicon glyphicon-ok green" style="color:green"></span></h2>
+                            }
                         </div>
                     }
-                    @if (Model.UserId == ViewBag.UserId)
-                    {
-                        <div class="col-sm-1">
-                        <form action="/Answers/Best" method="post">
-                        <input type="hidden" name="aId" value="@listAnswer.AnswerId" />
-                        <input type="hidden" name="qId" value="@Model.QuestionId" />
-                        <button class="btn" type="submit">Best</button>
-                        </form>
-                    @if (listAnswer.Best == true)
-                    {
-                        <h2><span class="glyphicon glyphicon-ok green" style="color:green"></span></h2>
-                    }
+                    <div class="col-sm-8">
+                        @listAnswer.Content
+                        <p>- @listAnswer.User</p>
                     </div>
-                    }
-                }
-
-                <div class="col-sm-8">
-                    @listAnswer.Content
-                    <p>- @listAnswer.User</p>
                 </div>
             </div>
-        </div>
-    }
+        }
 }
 <div class="well">
     <form class="form-group" action="/Answers/Create" method="post">

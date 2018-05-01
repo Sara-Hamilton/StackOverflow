@@ -12,10 +12,17 @@
 @if (Model.Any())
 {
     @*<ul>*@
-        @foreach (var listQuestion in Model)
+    @foreach (var listQuestion in Model)
+    {
+        @if (User.Identity.IsAuthenticated)
+        {
+            <h3><a href="~/Questions/DetailsAuthenticated/@listQuestion.QuestionId">@Html.DisplayFor(modelQuestion => listQuestion.Title)</a></h3><p>@listQuestion.Answers.Count() Answers</p>
+        }
+        else
         {
             <h3><a href="~/Questions/Details/@listQuestion.QuestionId">@Html.DisplayFor(modelQuestion => listQuestion.Title)</a></h3><p>@listQuestion.Answers.Count() Answers</p>
         }
+    }
     @*</ul>*@
 
 }

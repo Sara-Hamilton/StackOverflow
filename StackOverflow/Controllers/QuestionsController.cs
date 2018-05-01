@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace StackOverflow.Controllers
 {
-    [Authorize]
+   
     public class QuestionsController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -32,6 +32,7 @@ namespace StackOverflow.Controllers
             return View(_db.Questions.Include(question => question.Answers));
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -48,14 +49,26 @@ namespace StackOverflow.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Details(int id)
+     
+        public IActionResult Details(int id)
+        {
+            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //var currentUser = await _userManager.FindByIdAsync(userId);
+            ViewBag.UserId = null;
+            var data = _db.Questions.Include(question => question.Answers).Include(question => question.User).FirstOrDefault(x => x.QuestionId == id);
+            data.Answers = data.Answers.OrderByDescending(x => x.Best).ThenByDescending(x => x.VoteTally).ToList();
+            return View("Details", data);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> DetailsAuthenticated(int id)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
             ViewBag.UserId = userId;
             var data = _db.Questions.Include(question => question.Answers).Include(question => question.User).FirstOrDefault(x => x.QuestionId == id);
             data.Answers = data.Answers.OrderByDescending(x => x.Best).ThenByDescending(x => x.VoteTally).ToList();
-            return View(data);
+            return View("Details", data);
         }
     }
 }
