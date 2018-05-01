@@ -54,7 +54,7 @@ namespace StackOverflow.Controllers
             var currentUser = await _userManager.FindByIdAsync(userId);
             ViewBag.UserId = userId;
             var data = _db.Questions.Include(question => question.Answers).Include(question => question.User).FirstOrDefault(x => x.QuestionId == id);
-            data.Answers = data.Answers.OrderByDescending(x => x.VoteTally).ToList();
+            data.Answers = data.Answers.OrderByDescending(x => x.Best).ThenByDescending(x => x.VoteTally).ToList();
             return View(data);
         }
     }
