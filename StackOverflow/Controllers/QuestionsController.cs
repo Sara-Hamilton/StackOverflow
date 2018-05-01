@@ -29,7 +29,7 @@ namespace StackOverflow.Controllers
             //var currentUser = await _userManager.FindByIdAsync(userId);
             //return View(_db.Questions.Where(x => x.User.Id == currentUser.Id));
 
-            return View(_db.Questions);
+            return View(_db.Questions.Include(question => question.Answers));
         }
 
         public IActionResult Create()

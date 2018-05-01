@@ -11,12 +11,12 @@
 
 @if (Model.Any())
 {
-    <ul>
+    @*<ul>*@
         @foreach (var listQuestion in Model)
         {
-            <li><a href="~/Questions/Details/@listQuestion.QuestionId">@Html.DisplayFor(modelQuestion => listQuestion.Title)</a></li>
+            <h3><a href="~/Questions/Details/@listQuestion.QuestionId">@Html.DisplayFor(modelQuestion => listQuestion.Title)</a></h3><p>@listQuestion.Answers.Count() Answers</p>
         }
-    </ul>
+    @*</ul>*@
 
 }
 else
