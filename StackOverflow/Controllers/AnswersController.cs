@@ -42,5 +42,18 @@ namespace StackOverflow.Controllers
             _db.SaveChanges();
             return RedirectToAction("Details", "Questions", new { id = routeId});
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Vote()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            int id = int.Parse(Request.Form["answerId"]);
+            Answer answer = _db.Answers.FirstOrDefault(x => x.AnswerId == id);
+            answer.VoteTally += int.Parse(Request.Form["vote"]);
+            _db.Answers.Update(answer);
+            _db.SaveChanges();
+            return RedirectToAction("Details", "Questions", new { id = answer.QuestionId });
+        }
     }
 }
