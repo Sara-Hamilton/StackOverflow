@@ -20,5 +20,21 @@ namespace StackOverflow.Models
         public bool Best { get; set; } = false;
 
         public virtual ApplicationUser User { get; set; }
+
+        public List<Answer> SetBest(List<Answer> original, Answer answer)
+        {
+            for(int i = 0; i < original.Count; i++)
+            {
+                if(original[i].AnswerId == answer.AnswerId)
+                {
+                    original[i].Best = true;
+                }
+                else
+                {
+                    original[i].Best = false;
+                }   
+            }
+            return original;
+        }
     }
 }

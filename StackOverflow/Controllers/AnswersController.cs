@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace StackOverflow.Controllers
 {
@@ -40,7 +41,7 @@ namespace StackOverflow.Controllers
             answer.UserId = currentUser.Id;
             _db.Answers.Add(answer);
             _db.SaveChanges();
-            return RedirectToAction("Details", "Questions", new { id = routeId});
+            return RedirectToAction("Details", "Questions", new { id = routeId });
         }
 
         [HttpPost]
@@ -52,6 +53,22 @@ namespace StackOverflow.Controllers
             Answer answer = _db.Answers.FirstOrDefault(x => x.AnswerId == id);
             answer.VoteTally += int.Parse(Request.Form["vote"]);
             _db.Answers.Update(answer);
+            _db.SaveChanges();
+            return RedirectToAction("Details", "Questions", new { id = answer.QuestionId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Best()
+        {
+            int answerId = int.Parse(Request.Form["aId"]);
+            int questionId = int.Parse(Request.Form["qId"]);
+            Answer answer = _db.Answers.FirstOrDefault(x => x.AnswerId == answerId);
+            List<Answer> ansList = _db.Answers.Where(y => y.QuestionId == questionId).ToList();
+            ansList = answer.SetBest(ansList, answer);
+            for(int j = 0; j < ansList.Count; j++)
+            {
+                _db.Answers.Update(ansList[j]);
+            }
             _db.SaveChanges();
             return RedirectToAction("Details", "Questions", new { id = answer.QuestionId });
         }

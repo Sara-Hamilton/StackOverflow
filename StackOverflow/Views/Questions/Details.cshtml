@@ -28,7 +28,7 @@
                         </form>
                     </div>
                     <div class="row">
-                        <h3>@listAnswer.VoteTally</h3>                        
+                        <h3>@listAnswer.VoteTally</h3>
                     </div>
                     <div class="row">
                         <form action="/answers/vote" method="post">
@@ -38,17 +38,35 @@
                         </form>
                     </div>
                 </div>
+                @if (listAnswer.Best == true && Model.UserId != ViewBag.UserId)
+                {
+                    <div class="col-sm-1">
+                        <h2><span class="glyphicon glyphicon-ok green" style="color:green"></span></h2>
+                    </div>
+                }
+                @if (Model.UserId == ViewBag.UserId)
+                {
+                    <div class="col-sm-1">
+                        <form action="/Answers/Best" method="post">
+                            <input type="hidden" name="aId" value="@listAnswer.AnswerId" />
+                            <input type="hidden" name="qId" value="@Model.QuestionId" />
+                            <button class="btn" type="submit">Best</button>
+                        </form>
+                        @if (listAnswer.Best == true)
+                        {
+                            <h2><span class="glyphicon glyphicon-ok green" style="color:green"></span></h2>
+
+                        }
+                    </div>
+                }
                 <div class="col-sm-8">
                     @listAnswer.Content
                     <p>- @listAnswer.User</p>
                 </div>
             </div>
         </div>
-    }
-}
-
-
-
+     }
+ }
 <div class="well">
     <form class="form-group" action="/Answers/Create" method="post">
         <label>Your Answer:</label>
@@ -58,4 +76,3 @@
         <button class="btn">Add Answer</button>
     </form>
 </div>
- 
