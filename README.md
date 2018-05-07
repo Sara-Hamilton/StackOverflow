@@ -45,7 +45,7 @@ This is an Epicodus practice project for week 3 of the .NET course.  Its purpose
 
   * _Clone the github respository_
   ```
-  $ git clone https://github.com/StackOverflow/StackOverflow
+  $ git clone https://github.com/Sara-Hamilton/StackOverflow
   ```
 
   * _Install the .NET Framework and MAMP_
